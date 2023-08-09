@@ -1,0 +1,5 @@
+---
+- name: Ensure docker_nexus role is executed
+  hosts: docker_nexus
+  roles:
+    - docker_nexus
