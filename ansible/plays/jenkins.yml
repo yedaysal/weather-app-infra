@@ -1,0 +1,5 @@
+---
+- name: Ensure jenkins role is executed
+  hosts: jenkins
+  roles:
+    - jenkins
