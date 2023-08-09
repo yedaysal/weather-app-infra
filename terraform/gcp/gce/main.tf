@@ -26,3 +26,17 @@ resource "google_compute_instance" "devops-server" {
   // instance
   tags = [ "jenkins-server", "nexus-server" ]
 }
+
+resource "google_compute_firewall" "jenkins-server" {
+  name = "default-allow-jenkins-port"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports = [ "8080" ]
+  }
+
+  // Allow traffic from everywhere to instances with jenkins-server tag
+  source_ranges = [ "0.0.0.0/0" ]
+  target_tags = [ "jenkins-server" ]
+}
