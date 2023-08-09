@@ -1,0 +1,31 @@
+---
+# tasks file for docker_nexus role
+
+- name: Ensure Nexus docker container is created
+  community.docker.docker_container:
+    name: nexus
+    image: sonatype/nexus3
+    volumes:
+      - "nexus-data:/nexus-data"
+    ports:
+      - "8081:8081"
+    state: started
+
+- name: Ensure Nexus UI (http://{{ inventory_hostname }}:8081/) is available
+  uri:
+    url: "http://localhost:8081/"
+    method: GET
+    status_code:
+      - 200
+  register: uri_output
+  until: uri_output.status == 200
+  retries: 24 # Retries for 24 * 5 seconds = 120 seconds
+  delay: 5 # Retry every 5 seconds
+
+- name: Get Nexus admin password
+  command: cat /var/lib/docker/volumes/nexus-data/_data/admin.password
+  register: result
+
+- name: Print Nexus admin password
+  debug:
+    msg: "Nexus is available at (http://{{ inventory_hostname }}:8081/). Username/Password: admin/{{ result.stdout }}"
