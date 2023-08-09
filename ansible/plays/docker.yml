@@ -1,0 +1,5 @@
+---
+- name: Ensure docker role is executed
+  hosts: docker
+  roles:
+    - docker
