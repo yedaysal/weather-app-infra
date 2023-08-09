@@ -40,3 +40,17 @@ resource "google_compute_firewall" "jenkins-server" {
   source_ranges = [ "0.0.0.0/0" ]
   target_tags = [ "jenkins-server" ]
 }
+
+resource "google_compute_firewall" "nexus-server" {
+  name = "default-allow-nexus-port"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports = [ "8081" ]
+  }
+
+  // Allow traffic from everywhere to instances with nexus-server tag
+  source_ranges = [ "0.0.0.0/0" ]
+  target_tags = [ "nexus-server" ]
+}
