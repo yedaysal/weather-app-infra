@@ -1,0 +1,59 @@
+---
+# tasks file for docker role
+
+- name: Ensure apt package index is updated
+  apt:
+    update_cache: true
+
+- name: Ensure required packages for apt are installed
+  apt:
+    name:
+      - ca-certificates
+      - curl
+      - gnupg
+
+- name: Ensure python3-pip is installed
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Ensure python docker and docker-compose modules are installed
+  pip:
+    name:
+      - docker
+      - docker-compose
+    state: present
+
+- name: Ensure official Docker GPG key is added
+  shell: |
+    install -m 0755 -d /etc/apt/keyrings ;
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg --batch --yes ;
+    chmod a+r /etc/apt/keyrings/docker.gpg
+
+- name: Print Docker apt repository entry
+  shell: echo "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable"
+  register: apt_repository_entry
+
+- name: Ensure Docker apt repo is configured
+  apt_repository:
+    repo: '{{ apt_repository_entry.stdout }}'
+    state: present
+    filename: docker
+
+- name: Ensure docker and docker-compose are installed
+  apt:
+    update_cache: true
+    name: 
+      - docker
+      - docker-compose
+
+- name: Ensure user ansible is added to docker group
+  user:
+    name: "ansible"
+    groups: "docker"
+    append: true
+
+- name: Ensure docker_devops network is created
+  docker_network:
+    name: docker_devops
+    driver: bridge
