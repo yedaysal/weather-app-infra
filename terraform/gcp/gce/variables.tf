@@ -15,7 +15,7 @@ variable "image" {
 
 variable "machine_type" {
   type    = string
-  default = "e2-medium"
+  default = "e2-highcpu-4"
 }
 
 variable "project_id" {
