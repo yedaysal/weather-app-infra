@@ -50,3 +50,6 @@
     name: "jenkins"
     groups: "docker"
     append: true
+
+- name: Ensure devops-server is rebooted
+  ansible.builtin.reboot:
