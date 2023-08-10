@@ -1,6 +1,16 @@
 ---
 # tasks file for docker_nexus role
 
+- name: Ensure existing Nexus docker container is removed
+  docker_container:
+    name: nexus
+    state: absent
+
+- name: Ensure existing Nexus docker container volume is removed
+  docker_volume:
+    name: nexus-data
+    state: absent
+
 - name: Ensure Nexus docker container is created
   community.docker.docker_container:
     name: nexus
