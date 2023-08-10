@@ -9,6 +9,7 @@
       - "nexus-data:/nexus-data"
     ports:
       - "8081:8081"
+    restart_policy: "unless-stopped"
     state: started
 
 - name: Ensure Nexus UI (http://{{ inventory_hostname }}:8081/) is available
