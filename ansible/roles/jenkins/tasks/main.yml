@@ -44,3 +44,9 @@
 - name: Print Jenkins initial admin password
   debug:
     msg: "Jenkins is available at (http://{{ inventory_hostname }}:8080/). Initial Admin Password: {{ result.stdout }}"
+
+- name: Ensure user jenkins is added to docker group
+  user:
+    name: "jenkins"
+    groups: "docker"
+    append: true
