@@ -1,5 +1,5 @@
 resource "google_compute_instance" "devops-server" {
-  name         = "devops-server"
+  name         = "weather-app"
   machine_type = var.machine_type
   zone         = var.zone
   hostname     = var.hostname
