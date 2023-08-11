@@ -1,0 +1,5 @@
+---
+- name: Ensure kubectl role is executed
+  hosts: kubectl
+  roles:
+    - kubectl

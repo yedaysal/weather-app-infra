@@ -1,0 +1,25 @@
+# tasks file for kubectl role
+
+- name: Ensure packages needed to use the Kubernetes apt repository are installed
+  apt:
+    update_cache: true
+    name:
+      - ca-certificates
+      - curl
+    state: present
+
+- name: Ensure Google Cloud public signing key is present
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Ensure kubectl repository is configured
+  apt_repository:
+    repo: "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+    update_cache: true
+    state: present
+
+- name: Ensure kubectl package is installed
+  apt:
+    name: kubectl
+    state: present
