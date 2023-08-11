@@ -1,0 +1,41 @@
+# tasks file for gcloud role
+
+- name: Ensure packages needed to use the gcloud CLI apt repository are installed
+  apt:
+    update_cache: true
+    name:
+      - ca-certificates
+      - curl
+    state: present
+
+- name: Ensure Google Cloud public signing key is present
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+
+- name: Ensure gcloud CLI repository is configured
+  apt_repository:
+    repo: "deb https://packages.cloud.google.com/apt cloud-sdk main"
+    update_cache: true
+    state: present
+
+- name: Ensure gcloud and gcloud-auth-plugin packages are installed
+  apt:
+    name:
+      - google-cloud-cli
+      - google-cloud-sdk-gke-gcloud-auth-plugin
+    state: present
+
+- name: Ensure GCP terraform service account key is present
+  copy:
+    src: "{{ role_path }}/files/gcp-terraform-sa-key.json"
+    dest: "/root/gcp-terraform-sa-key.json"
+    owner: "root"
+    group: "root"
+    mode: '0644'
+
+- name: Ensure gcloud CLI is authorized to access Google Cloud with terraform service account
+  command: gcloud auth activate-service-account {{ service_account }} --key-file={{ key_file }} --project={{ project_id }}
+
+- name: Ensure kubectl is configured to access provisioned GKE cluster
+  command: gcloud container clusters get-credentials {{ kubernetes_cluster_name }} --region {{ region }}

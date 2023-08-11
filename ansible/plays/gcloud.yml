@@ -1,0 +1,5 @@
+---
+- name: Ensure gcloud role is executed
+  hosts: gcloud
+  roles:
+    - gcloud

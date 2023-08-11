@@ -1,0 +1,5 @@
+kubernetes_cluster_name: weather-app-project-395522-gke
+region: europe-central2
+service_account: terraform@weather-app-project-395522.iam.gserviceaccount.com
+key_file: /root/gcp-terraform-sa-key.json
+project_id: weather-app-project-395522
