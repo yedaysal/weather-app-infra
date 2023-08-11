@@ -1,7 +1,7 @@
 # Add an SSH pub key to ec2 to connect to the VMs
 resource "aws_key_pair" "weather_app" {
   key_name = "weather-app"
-  public_key = var.public_key
+  public_key = var.ssh_pub_key
 }
 
 # Create a nic for the weather-app VM
