@@ -1,4 +1,4 @@
-resource "google_compute_instance" "devops-server" {
+resource "google_compute_instance" "weather_app" {
   name         = "weather-app"
   machine_type = var.machine_type
   zone         = var.zone
@@ -28,7 +28,7 @@ resource "google_compute_instance" "devops-server" {
   tags = [ "jenkins-server", "nexus-server" ]
 }
 
-resource "google_compute_firewall" "jenkins-server" {
+resource "google_compute_firewall" "jenkins_server" {
   name = "default-allow-jenkins-port"
   network = "default"
 
@@ -42,7 +42,7 @@ resource "google_compute_firewall" "jenkins-server" {
   target_tags = [ "jenkins-server" ]
 }
 
-resource "google_compute_firewall" "nexus-server" {
+resource "google_compute_firewall" "nexus_server" {
   name = "default-allow-nexus-port"
   network = "default"
 
