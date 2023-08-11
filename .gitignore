@@ -50,6 +50,7 @@ Thumbs.db
 
 # Credential files
 *credentials*
+*key*
 
 # Local .terraform directories
 **/.terraform/*
