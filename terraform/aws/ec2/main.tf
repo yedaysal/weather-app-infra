@@ -20,6 +20,15 @@ resource "aws_instance" "weather_app" {
   ami = var.aws_ami_ubuntu_id
   instance_type = var.instance_type
 
+  user_data = <<-EOL
+    #!/bin/sh
+    
+    sudo useradd -m -s /usr/bin/bash ansible
+    sudo echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible
+    sudo mkdir /home/ansible/.ssh
+    sudo echo '${var.ssh_pub_key}' > /home/ansible/.ssh/authorized_keys
+  EOL
+
   network_interface {
     network_interface_id = aws_network_interface.weather_app.id
     device_index = 0
