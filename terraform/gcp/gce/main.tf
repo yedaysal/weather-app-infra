@@ -53,7 +53,7 @@ resource "google_compute_firewall" "allow_nexus_ports" {
 }
 
 resource "google_compute_firewall" "allow_npm_ports" {
-  name = "allow_npm_ports"
+  name = "allow-npm-ports"
   network = "default"
 
   allow {
