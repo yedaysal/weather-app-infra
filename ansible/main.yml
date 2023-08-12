@@ -1,0 +1,16 @@
+---
+# Main playbook that includes required plays in the correct order
+- name: Include docker_nexus.yml play
+  import_playbook: plays/docker_nexus.yml
+
+- name: Include docker_npm.yml play
+  import_playbook: plays/docker_npm.yml
+
+- name: Include kubectl.yml play
+  import_playbook: plays/kubectl.yml
+
+- name: Include gcloud.yml play
+  import_playbook: plays/gcloud.yml
+
+- name: Include jenkins.yml play
+  import_playbook: plays/jenkins.yml
