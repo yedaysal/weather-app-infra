@@ -20,7 +20,7 @@ variable "machine_type" {
 
 variable "project_id" {
   type    = string
-  default = "numeric-citron-395305"
+  default = "CHANGEME"
 }
 
 variable "region" {
