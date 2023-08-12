@@ -1,6 +1,6 @@
 variable "credentials_filename" {
   type    = string
-  default = "gcp_terraform_credentials.json"
+  default = "gcp-terraform-sa-key.json"
 }
 
 variable "hostname" {
