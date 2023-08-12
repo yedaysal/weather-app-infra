@@ -5,7 +5,7 @@ variable "credentials_filename" {
 
 variable "hostname" {
   type    = string
-  default = "devops-server.example.com"
+  default = "weather-app.example.com"
 }
 
 variable "image" {
