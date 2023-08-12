@@ -51,5 +51,8 @@
     groups: "docker"
     append: true
 
+- name: Ensure passwordless sudo is configured for user jenkins
+  command: echo 'jenkins ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/jenkins
+
 - name: Ensure the instance is rebooted
   ansible.builtin.reboot:
