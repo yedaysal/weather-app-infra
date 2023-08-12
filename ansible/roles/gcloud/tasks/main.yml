@@ -39,4 +39,4 @@
   command: gcloud auth activate-service-account {{ service_account }} --key-file={{ key_file }} --project={{ project_id }}
 
 - name: Ensure kubectl is configured to access provisioned GKE cluster
-  command: gcloud container clusters get-credentials {{ kubernetes_cluster_name }} --region {{ region }}
+  command: gcloud container clusters get-credentials {{ kubernetes_cluster_name }} --zone {{ zone }}

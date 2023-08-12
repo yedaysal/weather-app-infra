@@ -1,5 +1,5 @@
 key_file: /root/gcp-terraform-sa-key.json
 kubernetes_cluster_name: CHANGEME
 project_id: CHANGEME
-region: CHANGEME
+zone: CHANGEME
 service_account: CHANGEME
