@@ -24,8 +24,8 @@ resource "google_compute_instance" "weather_app" {
   tags = [ "jenkins-server", "nexus-server", "npm-server" ]
 }
 
-resource "google_compute_firewall" "jenkins_server" {
-  name = "default-allow-jenkins-port"
+resource "google_compute_firewall" "allow_jenkins_port" {
+  name = "allow-jenkins-port"
   network = "default"
 
   allow {
