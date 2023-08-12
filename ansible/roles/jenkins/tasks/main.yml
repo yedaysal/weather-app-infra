@@ -51,7 +51,7 @@
     groups: "docker"
     append: true
 
-- name: Ensure passwordless sudo is configured for user jenkins
+- name: Ensure passwordless sudo is configured for user jenkins to use kubectl
   command: echo 'jenkins ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/jenkins
 
 - name: Ensure the instance is rebooted
