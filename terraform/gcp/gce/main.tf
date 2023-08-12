@@ -38,13 +38,13 @@ resource "google_compute_firewall" "allow_jenkins_port" {
   target_tags = [ "jenkins-server" ]
 }
 
-resource "google_compute_firewall" "nexus_server" {
-  name = "default-allow-nexus-port"
+resource "google_compute_firewall" "allow_nexus_ports" {
+  name = "allow-nexus-ports"
   network = "default"
 
   allow {
     protocol = "tcp"
-    ports = [ "8081" ]
+    ports = ["8081", "8082"]
   }
 
   // Allow traffic from everywhere to instances with nexus-server tag
