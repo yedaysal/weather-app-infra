@@ -1,3 +1,4 @@
+---
 # tasks file for gcloud role
 
 - name: Ensure packages needed to use the gcloud CLI apt repository are installed
