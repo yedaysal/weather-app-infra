@@ -5,7 +5,7 @@ variable "gke_num_nodes" {
 
 variable "project_id" {
   type    = string
-  default = "weather-app-project-395522"
+  default = "CHANGEME"
 }
 
 variable "region" {
