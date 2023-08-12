@@ -51,3 +51,17 @@ resource "google_compute_firewall" "allow_nexus_ports" {
   source_ranges = [ "0.0.0.0/0" ]
   target_tags = [ "nexus-server" ]
 }
+
+resource "google_compute_firewall" "allow_npm_ports" {
+  name = "allow_npm_ports"
+  network = "default"
+
+  allow {
+    protocol = "tcp"
+    ports = ["80", "81", "443"]
+  }
+
+  // Allow traffic from everywhere to instances with npm-server tag
+  source_ranges = [ "0.0.0.0/0" ]
+  target_tags = [ "npm-server" ]
+}
