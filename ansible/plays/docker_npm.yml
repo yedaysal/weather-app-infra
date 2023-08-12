@@ -1,0 +1,5 @@
+---
+- name: Ensure docker_npm role is executed
+  hosts: docker_npm
+  roles:
+    - docker_npm

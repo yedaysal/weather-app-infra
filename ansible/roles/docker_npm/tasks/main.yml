@@ -1,0 +1,32 @@
+---
+# tasks file for docker_npm role
+
+- name: Ensure /opt/docker_npm directory exists
+  file:
+    path: "/opt/docker_npm"
+    state: directory
+
+- name: Ensure docker_npm compose file exists
+  copy:
+    src: "{{ role_path }}/files/docker-compose.yml"
+    dest: "/opt/docker_npm/docker-compose.yml"
+
+- name: Ensure the stack is up
+  shell: "docker-compose up -d"
+  args:
+    chdir: "/opt/docker_npm"
+
+- name: Ensure npm UI (http://{{ inventory_hostname }}:81/) is available
+  uri:
+    url: "http://{{ inventory_hostname }}:81/"
+    method: GET
+    status_code:
+      - 200
+  register: uri_output
+  until: uri_output.status == 200
+  retries: 12 # Retries for 12 * 5 seconds = 60 seconds
+  delay: 5 # Retry every 5 seconds
+
+- name: Print npm UI info
+  debug:
+    msg: "Nginx Proxy Manager is available at (http://{{ inventory_hostname }}:81/). Username/Password: admin@example.com/changeme"
