@@ -20,12 +20,8 @@ resource "google_compute_instance" "weather_app" {
     }
   }
 
-  // Tag this instance with 'jenkins-server' and 'nexus-server'
-  // tags so that the firewall rules 'default-allow-jenkins-port'
-  // and 'default-allow-nexus-port' target this instance to allow
-  // external IPs to access the Jenkins and Nexus servers on this
-  // instance
-  tags = [ "jenkins-server", "nexus-server" ]
+  // Tag this instance to apply firewall rules
+  tags = [ "jenkins-server", "nexus-server", "npm-server" ]
 }
 
 resource "google_compute_firewall" "jenkins_server" {
