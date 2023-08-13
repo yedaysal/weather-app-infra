@@ -2,6 +2,16 @@
 
 This repository contains the code and instructions to setup necessary infrastructure to build and deploy weather-app-api and weather-app-ui projects.
 
+## Requirements
+
+In order to setup the necessary infrastructure, the following software are required:
+
+- [Ansible](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html)
+- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+
+> **Note**
+> The underlying system should meet the hardware requirements to run above software.
+
 ## Instructions
 
 ### Fork Required Bitbucket Repositories
@@ -27,7 +37,7 @@ Fork [weather-app-api](https://bitbucket.org/yedaysal-devops/weather-app-api/src
   - Select **JSON** as key type and click on **CREATE**.
   - Rename the downloaded key file as **gcp-terraform-sa-key.json**.
   - On [bitbucket.org](https://bitbucket.org) go to *Projects -> weather-app-project -> Project settings -> SECURITY -> Access keys* and add your SSH public key.
-  - Clone this repository with `git clone git@bitbucket.org:yedaysal-devops/weather-app-infra.git`.
+  - Clone this repository.
   - Put the **gcp-terraform-sa-key.json** file to `path/to/local/repo/terraform/gcp/gce`, `path/to/local/repo/terraform/gcp/gke` and `path/to/local/repo/ansible/roles/gcloud/files` directories (create `files` directory) after cloning this repository.
 
 ### Google Compute Engine (GCE) Instance Setup Instructions
@@ -60,6 +70,9 @@ Open a Terminal window and follow the steps below:
 - cd into `ansible` directory in the cloned local repository directory.
 - Run `touch VAULT_PASS` command to create Ansible Vault password file.
 - Put initial vault password `3n5dLXH4` into the `VAULT_PASS` file.
+- Run `ansible-vault edit group_vars/k8s/vault.yml` and:
+  - Change `docker_server` variable's value to the domain name created in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section.
+  - Change `docker_username` and `docker_password` variables's values to your Nexus 3 repository login credentials.
 - Open `inventory.ini` file with a text editor and change all `CHANGEME` text with the IP address of the GCE instance created in the [GCE Instance Setup Instructions](#2-gce-instance-setup-instructions) section.
 - Open `group_vars/gcloud/vars.yml` file with a text editor and:
   - Change the value of `kubernetes_cluster_name` variable to terraform `kubernetes_cluster_name` output's value.
@@ -133,6 +146,12 @@ To configure application code repositories in your Bitbucket workspace:
 
 - Change the `CHANGEME` values in the `Jenkinsfile` file to your Nexus 3 repository login credentials.
 - Change the `CHANGEME` value in the `k8s/deployment.yaml` file to the domain name registered in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section.
+- Go to *Repository settings -> WORKFLOW -> Webhooks* and click on **Add webhook** button.
+- On the opening page:
+  - Give a title to the webhook.
+  - Enter Jenkins hook URL in the **http://GCE_INSTANCE_IP_ADDRESS:8080/bitbucket-hook/** format to *URL* section.
+  - Enable **Skip certificate verification** option in the *SSL/TLS* section.
+  - Select **Push** option in the *Triggers* section and click on **Save** button.
 
 ### Jenkins Configuration Instructions
 
@@ -140,7 +159,7 @@ Follow the instructions below to configure installed Jenkins instance:
 
 #### Initial Jenkins Configuration Instructions
 
-- Go to [Create an App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/) BitBucket Support page and follow the instructions to create an app password for jenkins in your Bitbucket account and save it.
+- Go to [Create an App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/) BitBucket Support page and follow the instructions to create an app password (give **Read** permission to *Projects* and *Repositories*) for jenkins in your Bitbucket account and save it.
 - Sign in to Jenkins web UI (`http://GCE_INSTANCE_IP_ADDRESS:8080/`), enter initial admin password and click on **Continue** button.
 - On the opening *Customize Jenkins* page, select **Select plugins to install** option.
 - On the opening page, search for **Bitbucket** plugin, select it, and click on **Install** button.
@@ -149,13 +168,6 @@ Follow the instructions below to configure installed Jenkins instance:
 
 #### Pipeline Setup Instructions
 
-- Go to forked weather-app-api repository on your Bitbucket workspace and perform the following:
-  - Go to *Repository settings -> WORKFLOW -> Webhooks* and click on **Add webhook** button.
-  - On the opening page:
-    - Give a title to the webhook.
-    - Enter Jenkins hook URL in the **http://GCE_INSTANCE_IP_ADDRESS:8080/bitbucket-hook/** format to *URL* section.
-    - Enable **Skip certificate verification** option in the *SSL/TLS* section.
-    - Select **Push** option in the *Triggers* section and click on **Save** button.
 - On the Jenkins dashboard, click on **+ New Item**, on the opening page enter a name for Weather API pipeline, select **Pipeline** and click on **OK** button.
 - On the opening page select **Build when a change is pushed to BitBucket** in the *Build Triggers* section.
 - In the *Pipeline* section:
