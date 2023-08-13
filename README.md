@@ -178,3 +178,70 @@ Follow the instructions below to configure installed Jenkins instance:
     - Change *Branch Specifier* in the *Braches to build* section to **main** and finally click on **Save** button.
 - On the opening pipeline page click on **Build Now** button on the left hand side menu to trigger the pipeline manually once, then the pipeline will be triggered on each push to the repository.
 - Repeat above steps to setup a pipeline for Weather UI.
+
+## Accessing The Weather API and Weather UI
+
+To access the deployed applications:
+
+- Go to [https://console.cloud.google.com/](https://console.cloud.google.com/).
+- On the left hand side menu, go to *NETWORKING -> Network services -> Load balancing* service and click on the Load Balancer which is created after Ingress-Nginx Controller is deployed your GKE cluster. The *Frontend* section on the opening page shows the IP address of the Load Balancer.
+    - Weather API is available at `http://LOAD_BALANCER_IP_ADDRESS/api/weather`
+    - Weather UI is available at: `http://LOAD_BALANCER_IP_ADDRESS/api/weather`
+
+## Screenshots
+
+![gce-instances](./resources/screenshots/gce-instances.png)
+
+<p align="center">
+  <strong>GCE Instances</strong>
+</p>
+
+<br>
+
+![gke-instance](./resources/screenshots/gke-instance.png)
+
+<p align="center">
+  <strong>GKE Instance</strong>
+</p>
+
+<br>
+
+![nexus3-docker-repo](./resources/screenshots/nexus3-docker-repo.png)
+
+<p align="center">
+  <strong>Nexus 3 Private Docker Repository</strong>
+</p>
+
+<br>
+
+![jenkins-api-pipeline](./resources/screenshots/jenkins-api-pipeline.png)
+
+<p align="center">
+  <strong>Jenkins Weather API Pipeline</strong>
+</p>
+
+<br>
+
+![jenkins-ui-pipeline](./resources/screenshots/jenkins-ui-pipeline.png)
+
+<p align="center">
+  <strong>Jenkins Weather UI Pipeline</strong>
+</p>
+
+<br>
+
+![api-k8s-ss](./resources/screenshots/api-k8s-ss.png)
+
+<p align="center">
+  <strong>Weather API Screenshot from GKE Instance</strong>
+</p>
+
+<br>
+
+![ui-k8s-ui](./resources/screenshots/ui-k8s-ss.png)
+
+<p align="center">
+  <strong>Weather UI Screenshot from GKE Instance</strong>
+</p>
+
+<br>
