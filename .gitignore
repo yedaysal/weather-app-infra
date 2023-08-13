@@ -51,6 +51,7 @@ Thumbs.db
 # Credential files
 *credentials*
 *key*
+*VAULT_PASS*
 
 # Local .terraform directories
 **/.terraform/*
