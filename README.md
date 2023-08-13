@@ -190,58 +190,37 @@ To access the deployed applications:
 
 ## Screenshots
 
+### GCE Instances
+
 ![gce-instances](./resources/screenshots/gce-instances.png)
-
-<p align="center">
-  <strong>GCE Instances</strong>
-</p>
-
 <br>
+
+### GKE Instance
 
 ![gke-instance](./resources/screenshots/gke-instance.png)
-
-<p align="center">
-  <strong>GKE Instance</strong>
-</p>
-
 <br>
+
+### Nexus 3 Private Docker Repository
 
 ![nexus3-docker-repo](./resources/screenshots/nexus3-docker-repo.png)
-
-<p align="center">
-  <strong>Nexus 3 Private Docker Repository</strong>
-</p>
-
 <br>
+
+### Jenkins Weather API Pipeline
 
 ![jenkins-api-pipeline](./resources/screenshots/jenkins-api-pipeline.png)
-
-<p align="center">
-  <strong>Jenkins Weather API Pipeline</strong>
-</p>
-
 <br>
+
+### Jenkins Weather UI Pipeline
 
 ![jenkins-ui-pipeline](./resources/screenshots/jenkins-ui-pipeline.png)
-
-<p align="center">
-  <strong>Jenkins Weather UI Pipeline</strong>
-</p>
-
 <br>
+
+### Weather API Screenshot from GKE Instance
 
 ![api-k8s-ss](./resources/screenshots/api-k8s-ss.png)
-
-<p align="center">
-  <strong>Weather API Screenshot from GKE Instance</strong>
-</p>
-
 <br>
 
+### Weather UI Screenshot from GKE Instance
+
 ![ui-k8s-ui](./resources/screenshots/ui-k8s-ss.png)
-
-<p align="center">
-  <strong>Weather UI Screenshot from GKE Instance</strong>
-</p>
-
 <br>
