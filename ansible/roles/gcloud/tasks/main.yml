@@ -20,10 +20,15 @@
     update_cache: true
     state: present
 
-- name: Ensure gcloud and gcloud-auth-plugin packages are installed
+- name: Ensure gcloud package is installed
   apt:
     name:
       - google-cloud-cli
+    state: present
+
+- name: Ensure gcloud-auth-plugin package is installed
+  apt:
+    name:
       - google-cloud-sdk-gke-gcloud-auth-plugin
     state: present
 
