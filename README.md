@@ -58,6 +58,8 @@ Open a Terminal window and perform the following:
 Open a Terminal window and follow the steps below:
 
 - cd into `ansible` directory in the cloned local repository directory.
+- Run `touch VAULT_PASS` command to create Ansible Vault password file.
+- Put initial vault password `3n5dLXH4` into the `VAULT_PASS` file.
 - Open `inventory.ini` file with a text editor and change all `CHANGEME` text with the IP address of the GCE instance created in the [GCE Instance Setup Instructions](#2-gce-instance-setup-instructions) section.
 - Open `group_vars/gcloud/vars.yml` file with a text editor and:
   - Change the value of `kubernetes_cluster_name` variable to terraform `kubernetes_cluster_name` output's value.
@@ -138,7 +140,7 @@ Follow the instructions below to configure installed Jenkins instance:
 
 #### Initial Jenkins Configuration Instructions
 
-- Go to [Create an App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/) BitBucket Support page and follow the instructions to create an app password for jenkins and save it.
+- Go to [Create an App password](https://support.atlassian.com/bitbucket-cloud/docs/create-an-app-password/) BitBucket Support page and follow the instructions to create an app password for jenkins in your Bitbucket account and save it.
 - Sign in to Jenkins web UI (`http://GCE_INSTANCE_IP_ADDRESS:8080/`), enter initial admin password and click on **Continue** button.
 - On the opening *Customize Jenkins* page, select **Select plugins to install** option.
 - On the opening page, search for **Bitbucket** plugin, select it, and click on **Install** button.
@@ -147,7 +149,7 @@ Follow the instructions below to configure installed Jenkins instance:
 
 #### Pipeline Setup Instructions
 
-- Go to forked weather-app-api repository on your workspace and perform the following:
+- Go to forked weather-app-api repository on your Bitbucket workspace and perform the following:
   - Go to *Repository settings -> WORKFLOW -> Webhooks* and click on **Add webhook** button.
   - On the opening page:
     - Give a title to the webhook.
