@@ -1,0 +1,5 @@
+---
+- name: Ensure k8s_config role is executed
+  hosts: k8s_config
+  roles:
+    - k8s_config

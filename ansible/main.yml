@@ -12,5 +12,8 @@
 - name: Include gcloud.yml play
   import_playbook: plays/gcloud.yml
 
+- name: Include k8s_config.yml play
+  import_playbook: plays/k8s_config.yml
+
 - name: Include jenkins.yml play
   import_playbook: plays/jenkins.yml

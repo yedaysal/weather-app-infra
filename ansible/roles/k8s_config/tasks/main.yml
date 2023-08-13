@@ -1,0 +1,22 @@
+---
+# tasks file for k8s_config role
+
+- name: Ensure Python kubernetes module is installed
+  pip:
+    name:
+      - kubernetes
+    state: present
+
+- name: Ensure Ingress-Nginx Controller k8s manifest is downloaded
+  get_url:
+    url: https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.1/deploy/static/provider/cloud/deploy.yaml
+    dest: ~/ingress-nginx-controller.yaml
+    mode: '0664'
+
+- name: Ensure Ingress-Nginx Controller is deployed to k8s
+  kubernetes.core.k8s:
+    state: present
+    src: ~/ingress-nginx-controller.yaml
+
+- name: Ensure Nexus 3 docker registry connection secret is created
+  command: kubectl create secret docker-registry regcred --docker-server={{ docker_server }} --docker-username={{ docker_username }} --docker-password={{ docker_password }}
