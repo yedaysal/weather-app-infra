@@ -61,7 +61,7 @@ Open a Terminal window and perform the following:
 - Open `variables.tf` file with a text editor,  change the default value of `project_id` variable (`CHANGEME`) with the project ID of the project you created.
 - Run `terraform init` command.
 - Run `terraform apply -auto-approve` command.
-- Note the values of `kubernetes_cluster_name`, `zone` and `project_id` outputs in the `terraform apply` output to use in the [GCE Instance Software Setup Instructions](#4-gce-instance-software-setup-instructions) section.
+- Note the values of `kubernetes_cluster_name`, `zone` and `project_id` outputs in the `terraform apply` output to use in the [GCE Instance Software Setup Instructions](#gce-instance-software-setup-instructions) section.
 
 ### GCE Instance Software Setup Instructions
 
@@ -71,9 +71,9 @@ Open a Terminal window and follow the steps below:
 - Run `touch VAULT_PASS` command to create Ansible Vault password file.
 - Put initial vault password `3n5dLXH4` into the `VAULT_PASS` file.
 - Run `ansible-vault edit group_vars/k8s/vault.yml` and:
-  - Change `docker_server` variable's value to the domain name created in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section.
+  - Change `docker_server` variable's value to the domain name created in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) section.
   - Change `docker_username` and `docker_password` variables's values to your Nexus 3 repository login credentials.
-- Open `inventory.ini` file with a text editor and change all `CHANGEME` text with the IP address of the GCE instance created in the [GCE Instance Setup Instructions](#2-gce-instance-setup-instructions) section.
+- Open `inventory.ini` file with a text editor and change all `CHANGEME` text with the IP address of the GCE instance created in the [Google Compute Engine (GCE) Instance Setup Instructions](#google-compute-engine-gce-instance-setup-instructions) section.
 - Open `group_vars/gcloud/vars.yml` file with a text editor and:
   - Change the value of `kubernetes_cluster_name` variable to terraform `kubernetes_cluster_name` output's value.
   - Change the value of `project_id` variable to terraform `project_id` output's value.
@@ -122,14 +122,14 @@ To configure the Nginx Proxy Manager instance for providing HTTPS connection to 
 - On the opening *Change Password* popup windows provide a new password and click on **Save** button.
 - On the top menu go to *SSL Cerfiticates* and click on **Add SSL Certificate** button.
 - On the opening popup window:
-  - Enter the domain name created in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section to *Domain Names* section.
+  - Enter the domain name created in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) section to *Domain Names* section.
   - Enable **Use a DNS Challenge** option and:
     - Select **DuckDNS** as *DNS Provider*.
-    - Enter the DuckDNS token saved in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) to *Credentials File Content* area.
+    - Enter the DuckDNS token saved in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) to *Credentials File Content* area.
   - Enable **I Agree to the Let's Encrypt Terms of Service** option and click on **Save** button.
 - After the SSL certificate is added, go to *Hosts -> Proxy Hosts* on the top menu and click on **Add Proxy Host** button.
 - On the opening popup window *Details* section:
-  - Enter the domain name created in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section to *Domain Names* section.
+  - Enter the domain name created in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) section to *Domain Names* section.
   - Enter the IP address of the GCE instance to *Forward Hostname / IP* section.
   - Enter Nexus 3 docker repository port **8082** to *Forward Port* section.
 - On the opening popup window *SSL* section:
@@ -145,7 +145,7 @@ The forked weather-app-api and weather-app-ui repositories in your Bitbucket wor
 To configure application code repositories in your Bitbucket workspace:
 
 - Change the `CHANGEME` values in the `Jenkinsfile` file to your Nexus 3 repository login credentials.
-- Change the `CHANGEME` value in the `k8s/deployment.yaml` file to the domain name registered in the [Duck DNS Domain Configuration](#duck-dns-domain-configuration) section.
+- Change the `CHANGEME` value in the `k8s/deployment.yaml` file to the domain name registered in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) section.
 - Go to *Repository settings -> WORKFLOW -> Webhooks* and click on **Add webhook** button.
 - On the opening page:
   - Give a title to the webhook.
