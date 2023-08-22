@@ -120,7 +120,7 @@ To configure the Nginx Proxy Manager instance for providing HTTPS connection to 
 - Sign in to Nginx Proxy Manager web UI (`http://GCE_INSTANCE_IP_ADDRESS:81/`).
 - On the opening *Edit User* popup window update the *Email* area and click on **Save** button.
 - On the opening *Change Password* popup windows provide a new password and click on **Save** button.
-- On the top menu go to *SSL Cerfiticates* and click on **Add SSL Certificate** button.
+- On the top menu go to *SSL Certificates* and click on **Add SSL Certificate** button.
 - On the opening popup window:
   - Enter the domain name created in the [Duck DNS Domain Configuration Instructions](#duck-dns-domain-configuration-instructions) section to *Domain Names* section.
   - Enable **Use a DNS Challenge** option and:
@@ -175,7 +175,7 @@ Follow the instructions below to configure installed Jenkins instance:
   - Select **Git** as *SCM*
   - Enter the projects HTTPS git URL to *Repository URL* section
   - Add Bitbucket app password for jenkins created previously to *Credentials* section (Use **Username with password** as *Kind* but just provide the app password to *Password* area)
-  - Change *Branch Specifier* in the *Braches to build* section to **main** and finally click on **Save** button.
+  - Change *Branch Specifier* in the *Branches to build* section to **main** and finally click on **Save** button.
 - On the opening pipeline page click on **Build Now** button on the left hand side menu to trigger the pipeline manually once, then the pipeline will be triggered on each push to the repository.
 - Repeat above steps to setup a pipeline for Weather UI.
 
